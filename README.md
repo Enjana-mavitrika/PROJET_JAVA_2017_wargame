@@ -22,12 +22,12 @@ _Oussema TRABELSI - Mohamed KOMAH - Solofo RABONARIJAONA_
  --------------------------------------------------------------------------------------------------------
 ## consige de codage
 
-1- Pour l'ensemble du projet voici les règles de nomination des variables:
-1.1 Toutes les variables en minuscules 
-1.2 Toutes les constantes en magiscules
-2- Les noms des variables doivent etres explicite.
-2.1 Le code doit être indempté et commenté pour permetre la compréhension
-2.2 Le nom des methodes doivent être explicite aussi c'est à dire très specifique par rapport à ce qu'il fait. 
++ Pour l'ensemble du projet voici les règles de nomination des variables:
+- Toutes les variables en minuscules 
+- Toutes les constantes en magiscules
+- Les noms des variables doivent etres explicite.
+- Le code doit être indempté et commenté pour permetre la compréhension
+- Le nom des methodes doivent être explicite aussi c'est à dire très specifique par rapport à ce qu'il fait. 
  ## OBJECTIF    
  + **Samedi 06/10** : Terminer la version du jeu avec l'interface graphique simple
 
