@@ -22,7 +22,7 @@ _Oussema TRABELSI - Mohamed KOMAH - Solofo RABONARIJAONA_
  --------------------------------------------------------------------------------------------------------
 ## consige de codage
 
-+ Pour l'ensemble du projet voici les règles de nomination des variables:
++ **Pour l'ensemble du projet voici les règles de nomination des variables:**
 - Toutes les variables en minuscules 
 - Toutes les constantes en magiscules
 - Les noms des variables doivent etres explicite.
