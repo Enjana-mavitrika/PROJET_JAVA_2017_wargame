@@ -1,5 +1,6 @@
-# PROJET_JAVA_2017_wargame - Oussema TRABELSI - Mohamed KOMAH - Solofo RABONARIJAONA
+# PROJET_JAVA_2017_wargame 
 Projet S5 L3 INFO - UJM
+_Oussema TRABELSI - Mohamed KOMAH - Solofo RABONARIJAONA_
 
 -------------------------------------------------------------------------------
 ## PLAN 
