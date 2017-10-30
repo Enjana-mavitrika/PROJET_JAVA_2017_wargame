@@ -23,3 +23,22 @@ _Oussema TRABELSI - Mohamed KOMAH - Solofo RABONARIJAONA_
  
  ## OBJECTIF    
  + **Samedi 06/10** : Terminer la version du jeu avec l'interface graphique simple
+
+--------------------------------------------------------------------------------------------------------
+## PARTAGE DES TACHES
+**30/10/2017 : Travaille en Groupe ( Diagramme de classe finale + partage des taches )**
+
+*TACHES:*
++**Oussema:**
+ -classe Position 
+ -classe Elements
++**Solofo:**
+-classe Obstacle
+-classe TypeObstacle 
++**Mohammed:**
+-classe Soldat
+-classe Monster
+-classe Heros
+
+** :)    BON TRAVAIL,oublié pas les kebab... à suivre :) *
+----------------------------------------------------------------------------------------
