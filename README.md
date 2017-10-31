@@ -40,7 +40,7 @@ _Oussema TRABELSI - Mohamed KOMAH - Solofo RABONARIJAONA_
  - classe Position 
  - classe Elements
 + **Solofo:**
-- classe Carte
+- classe PanneauJeu
 - classe FenetreJeu 
 + **Mohammed:**
 - classe Soldat
