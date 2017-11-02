@@ -36,7 +36,7 @@ public Element()
   public void seDessine(Graphics g)
   {
   	g.setColor(texture);
-  	g.fillRect(pos.getX(), pos.getY(), NB_PIX_CASE, NB_PIX_CASE);
+  	g.fillRect(pos.getX() * NB_PIX_CASE, pos.getY() * NB_PIX_CASE, NB_PIX_CASE, NB_PIX_CASE);
   }
 
   

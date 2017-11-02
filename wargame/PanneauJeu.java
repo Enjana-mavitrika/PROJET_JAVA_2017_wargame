@@ -16,4 +16,5 @@ public class PanneauJeu extends JPanel
   {
       map.toutDessiner(g);
   }
+  public Carte getMap(){ return map; }
 }
