@@ -1,107 +1,189 @@
-/**
- * Classe qui gère la carte et les éléments qui y figurent
- * @author S.RABONARIJAONA
- * @version 1.0
- * 
- */
-
-
-/*
- * Historique :
- *   => demande méthode getPosition() de la classe Element
- */
-
-
 package wargame;
+import java.awt.Graphics;
+import java.lang.Math;
+
+import wargame.ISoldat.TypesM;
 public class Carte implements ICarte, IConfig
 {
+    private Element tabElements[] ;
 
 
-  /*--------------------------------------
-   *                                     *
-   *               Data                  *
-   *                                     *
-   *-------------------------------------*/
-  private int carte[]
-  private Element elements[] = new Element[]; // tableau contenant tous les élements de la carte
-  
-  
-  /*-------------------------------------
-   *                                     *
-   *           Constructors              *
-   *                                     *
-   *-------------------------------------*/
-  /**
-   * Constructeur : Creation et positionnement aleatoire des soldats et des obstacles
-   */ 
-  public Carte(){
+    public Carte()
+    { tabElements = new Element[41];
+     	for(int x=0;x<41;x++)
+     	{
+     		tabElements[x]=new Element(); 
+     	}
     
-  }
-  /*--------------------------------------
-   *                                     *
-   *             Methods                 *
-   *                                     *
-   *-------------------------------------*/
-  /**
-   * Renvoie element de la carte a la position donnee en parametre
-   * @param Position
-   * @return Element si Position en parametre contient un element
-   * @return Exception si Position en parametre est non valide OU ne contient aucun element
-   */ 
-  Element getElement(Position pos)
-  {
-    if (!pos.estValide()){throw new Exception("Position non valide !!");}
-    for (int i = 0; i < elements.length; i++)
-    {
-      // parcourirs les élements et renvoyer l'element qui a la même position que pos donné en parametre
-      if (pos.getX() >= elements[i].getPosition().getX() && pos.getX() <= elements[i].getPosition().getX() + NB_PIX_CASE && pos.getY() >= elements[i].getPosition().getY() && pos.getY() <= elements[i].getPosition().getY() + NB_PIX_CASE)
-	return elements[i];
-      throw new Exception("Position vide");
+    	// creer aleatoirement 41 elements different type : 6 h�ros, 15 monstres, 20 obstacles et les positionner aléatoirem
+    	for (int i = 0; i < NB_HEROS ; i++) {
+    		tabElements[i] = new Heros();
+    		deplaceSoldat(trouvePositionVide(),(Soldat) tabElements[i]);
+    	}
+    	for (int k = NB_HEROS; k < NB_HEROS + NB_MONSTRES; k++) {
+    		tabElements[k] = new Monstres();
+    		deplaceSoldat(trouvePositionVide(),(Soldat) tabElements[k]);
+    	}
+    	for (int j = NB_HEROS + NB_MONSTRES; j < tabElements.length; j++)
+    	{
+    		tabElements[j] = new Obstacle();
+    	Position	p=trouvePositionVide();
+    	tabElements[j].getPos().setX(p.getX());
+    	tabElements[j].getPos().setY(p.getY());
+    	}    	
+    	
     }
+
+
+    public Position trouvePositionVide()
+    {
+	boolean trouveVide = false;
+	int i=0, j=0;
+	while (!trouveVide)
+	    {
+		i = (int)(Math.random()*LARGEUR_CARTE);
+		j = (int)(Math.random()*HAUTEUR_CARTE);
+		
+		for (int k = 0; k < tabElements.length; k++)
+		    {
+			if (i == tabElements[k].getPos().getX() && j == tabElements[k].getPos().getY())
+			    trouveVide = false;
+		    }
+		trouveVide = true;
+	    }
+	
+	return (new Position(i,j));
+    }
+
+    
+    public Position trouvePositionVide(Position pos)
+    {
+      return pos;
+    }
+
+  
+    public boolean estVide(Position pos)
+    {
+    	for(int i = 0; i < tabElements.length; i++) {
+    		if (tabElements[i].getPos().getX() == pos.getX() && tabElements[i].getPos().getY() == pos.getY())
+    			return false;
+    	}
+    	return true;
+    }
+    
+    /*
+    public boolean estVide(Position pos)
+    {
+    	Element el = new Element();
+    	try {
+    		el = getElement(pos);
+    		return false;
+    	}
+    	catch(MonException e) {
+    		return true;
+    	}
+    }
+    
+*/
+
+    
+    // dessine chaque element sur la carte 
+    public void seDessiner(Graphics g)
+    {
+	
+	// affichage carte vide
+
+	// grille vide
+	g.setColor(IConfig.COULEUR_VIDE);
+	for (int y = 0; y < IConfig.HAUTEUR_CARTE * IConfig.NB_PIX_CASE; y += IConfig.NB_PIX_CASE)
+	    {
+		for (int x = 0; x <= IConfig.LARGEUR_CARTE * IConfig.NB_PIX_CASE; x += IConfig.NB_PIX_CASE)
+		    g.drawRect(x, y, IConfig.NB_PIX_CASE, IConfig.NB_PIX_CASE);
+	    }
+
+	// grille fin 
+
+
+	for (int i = 0; i < tabElements.length; i++)
+	    
+		tabElements[i].seDessine(g);
+	    
+    }
+
+
+
+
+
+  public Element getElement(Position pos) throws MonException
+  {
+	for (int i=0; i < tabElements.length; i++)
+	{
+		if (tabElements[i].getPos().getX() == pos.getX() && tabElements[i].getPos().getX() == pos.getX())
+			return tabElements[i]; 
+	}
+	throw new MonException(tabElements, pos);
+	
   }
 
-  Position trouvePositionVide()
+
+ 
+
+  public Heros trouveHeros()
+  {
+	  int i = 0;
+	  boolean trouve = false;
+	  while(!trouve)  
+	  {	
+		  i = (int)(Math.random() * 40);
+		  if(tabElements[i].estHero())
+			  trouve = true;
+	  }
+	  
+	  return (Heros)tabElements[i];
+  }
+
+  public Heros trouveHeros(Position pos)
+  {
+    return new Heros();
+  }
+
+ public boolean deplaceSoldat(Position pos, Soldat soldat)
+  {
+    if (pos.estValide() && !estVide(pos)) {
+    	soldat.seDeplace(pos);
+    	return true;
+    }
+    return false;
+  }
+
+  public void mort(Soldat perso)
+  {
+    perso.setPos(new Position(-1, -1));
+  }
+
+  public boolean actionHeros(Position pos, Position pos2)
+  {
+    return true;
+  }
+
+  public void jouerSoldats(PanneauJeu pg)
   {
     
   }
 
-  Position trouvePositionVide()
+  public void toutDessiner(Graphics g)
   {
-    
-  }
-
-  Heros trouveHeros()
-  {
-    
-  }
-
-  Heros trouveHeros()
-  {
-    
-  }
-
-  boolean deplaceSoldat(Position pos, Soldat soldat)
-  {
-    
-  }
-
-  void mort(Soldat perso)
-  {
-    
-  }
-
-  boolean actionHeros(Position pos, Position pos2)
-  {
-    
-  }
-
-  void jouerSoldats(PanneauJeu pg)
-  {
-    
-  }
-
-  void toutDessiner(Graphics g)
-  {
-    
+	// affichage carte vide
+		g.setColor(IConfig.COULEUR_VIDE);
+		for (int y = 0; y < IConfig.HAUTEUR_CARTE * IConfig.NB_PIX_CASE; y += IConfig.NB_PIX_CASE)
+		    {
+			for (int x = 0; x <= IConfig.LARGEUR_CARTE * IConfig.NB_PIX_CASE; x += IConfig.NB_PIX_CASE)
+			    g.drawRect(x, y, IConfig.NB_PIX_CASE, IConfig.NB_PIX_CASE);
+		    }
+		
+	    
+	  
+	  for (int i = 0; i < tabElements.length; i++)
+		  tabElements[i].seDessine(g);
   }  
-}
+  }

@@ -1,6 +1,8 @@
 package wargame;
 
-    public class Monstre extends Soldat{
+import java.awt.Graphics;
+
+public class Monstres extends Soldat{
         /**
          * typeM
          */
@@ -11,12 +13,11 @@ package wargame;
          * @param carte
          */
 
-        public Monstre(String nom,Carte carte){
-            super(nom,carte);
+        public Monstres(){
             this.heros = false;
             this.monstre=true;
             this.typeM = TypesM.getTypeMAlea();
-            this.texture = typeM.getTexture();
+            this.texture = COULEUR_MONSTRES;
             vie=getVie();
             this.pointsDeVie=vie;
         }
@@ -40,5 +41,6 @@ package wargame;
         public int getPortee(){
             return typeM.getPortee();
         }
-
+        
+    
     }

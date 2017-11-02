@@ -1,5 +1,7 @@
 package wargame;
 
+import java.awt.Graphics;
+
 public class Heros extends Soldat {
         /**
          * typeH
@@ -10,11 +12,10 @@ public class Heros extends Soldat {
          * @param nom
          * @param carte
          */
-        public Heros(String nom, Carte carte){
-            super(nom,carte);
-            this.heros=true;
+        public Heros(){
+            super.heros=true;
             this.typeH = TypesH.getTypeHAlea();
-            this.texture = typeH.getTexture();
+            this.texture = COULEUR_HEROS;
             vie=getVie();
             this.pointsDeVie=vie;
         }
@@ -36,5 +37,7 @@ public class Heros extends Soldat {
         public int getPortee(){
             return typeH.getPortee();
         }
+        
+       
 
 }

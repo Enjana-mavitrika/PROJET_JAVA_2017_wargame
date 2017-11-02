@@ -1,7 +1,5 @@
 package wargame;
 
-pu
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -35,11 +33,10 @@ import javax.swing.Timer;
          * @param nom
          * @param carte
          */
-        public Soldat(String nom, Carte carte){
-            this.carte=carte;
-            this.num = nom;
-            vide = false;
-            this.setClickable(true);
+        public Soldat(){
+          
+            super();
+           // this.setClickable(true);
         }
         /**
          *
@@ -57,7 +54,7 @@ import javax.swing.Timer;
          * @param pos position du héros à attaquer/case sur laquelle aller
          * @return boolean -> True si l'attaque/déplacement s'est effectué, false sinon
          */
-        public boolean actionHeros(Position pos) {
+        /*public boolean actionHeros(Position pos) {
             if(!carte.getElement(pos).vide) {
 
                 if (carte.getElement(pos).estClickable()) {
@@ -79,6 +76,7 @@ import javax.swing.Timer;
             aJoueCeTour=true;
             return carte.deplaceSoldat(pos,this);
         }
+        */
 
 
         //@Override
@@ -106,8 +104,8 @@ import javax.swing.Timer;
          * @return true si attaque effectuee false si erreur
          */
         //@Override
-        public boolean combat(Soldat soldat) {
-            Monstre monstre;
+        public void combat(Soldat soldat) {
+            Monstres monstre;
             Heros heros;
 
             try{
@@ -118,17 +116,15 @@ import javax.swing.Timer;
                 }
                 else
                 {
-                    monstre = (Monstre) this;
+                    monstre = (Monstres) this;
                     if(this.estAPortee(soldat.getPos()))
                         soldat.baisserVie((int)(Math.random()*monstre.getTypeM().getPuissance())+1);
                     this.combatM=true;
                 }
 
-                return true;
             }catch (Exception e)
             {
                 System.out.println(e.getStackTrace());
-                return false;
             }
 
         }
@@ -137,9 +133,8 @@ import javax.swing.Timer;
         /**
          * @param
          */
-        public void deplaceSoldat(Position newPos) {
-            this.deplace=true;
-            this.carte.deplaceSoldat(newPos,this);
+        public void seDeplace(Position newPos) {
+            this.pos = newPos;
         }
 
         public int getVieCourante(){
@@ -152,9 +147,10 @@ import javax.swing.Timer;
                 this.pointsDeVie-=points;
             if(this.pointsDeVie <= 0) {
                 this.enVie = false;
-                mort();
             }
         }
+        
+        
         public void setAJoueCeTour(boolean bool)
         {
             this.aJoueCeTour=bool;
@@ -185,12 +181,6 @@ import javax.swing.Timer;
             return false;
         }
 
-        public void mort(){
-            this.carte.getGrille()[this.getPos().getX()][this.getPos().getY()].setElement(new Element());
-        }
-
-        //public boolean estHeros(){return this.heros;}
-        //public boolean estMonstre(){return this.monstre;}
         public boolean estEnVie()
         {
             return this.enVie;

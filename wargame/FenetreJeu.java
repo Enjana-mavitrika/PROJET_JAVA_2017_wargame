@@ -1,3 +1,4 @@
+package wargame;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import javax.swing.JButton;
@@ -11,7 +12,7 @@ public class FenetreJeu
   {
     // creation fenetre
     JFrame fenetre = new JFrame();
-    PanneauJeu conteneurBody = new PanneauJeu(new CarteTest());
+    PanneauJeu conteneurBody = new PanneauJeu(new Carte());
     JLabel messageHeader = new JLabel();
     JLabel infoFooter = new JLabel();
     JPanel conteneurHeader = new JPanel();
