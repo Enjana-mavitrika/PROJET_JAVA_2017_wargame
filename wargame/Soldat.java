@@ -1,7 +1,6 @@
 package wargame;
 
-<<<<<<< HEAD
-=======
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,8 +8,8 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
->>>>>>> 7f43ae79166c23ddb1ca5e0d466989027490b953
-    /**
+
+/**
      *
      * @version : 1.0
      */

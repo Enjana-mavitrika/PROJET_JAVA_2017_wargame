@@ -46,6 +46,7 @@ public class FenetreJeu
     fenetre.setResizable(false);
     fenetre.setContentPane(conteneurPrincipale);
     // affichage fenetre
+  
     fenetre.setVisible(true);
     
 
@@ -85,6 +86,23 @@ public class FenetreJeu
       }
     }
     
+//TEEEEEEEEEEEEST    
+    /*combat et tuer un monstre
+    Element Tab[]=conteneurBody.getMap().getTabElements();
+Tab[0].getPos().setX(0);
+Tab[0].getPos().setY(0);
+Tab[7].getPos().setX(0);
+Tab[7].getPos().setY(1);
 
+Heros H1=(Heros)Tab[0];
+Monstres M1=(Monstres)Tab[7];
+while(M1.pointsDeVie>0)
+{
+System.out.println("AVANT:"+M1.pointsDeVie);
+H1.combat(M1);
+System.out.println("APRES:"+M1.pointsDeVie);
+}*/
+conteneurBody.repaint();
   }
+
 }

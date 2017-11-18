@@ -1,4 +1,4 @@
-package model;
+package wargame;
 
 import java.util.ArrayList;
 /**

@@ -14,6 +14,7 @@ public class PanneauJeu extends JPanel
     
   public void paintComponent(Graphics g)
   {
+	  super.paintComponent(g);
       map.toutDessiner(g);
   }
   public Carte getMap(){ return map; }

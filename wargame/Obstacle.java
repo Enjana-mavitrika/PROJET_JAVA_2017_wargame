@@ -1,13 +1,12 @@
 package wargame;
 import java.awt.Color;
 import java.awt.Graphics;
-<<<<<<< HEAD
-public class Obstacle  {
-=======
-
 import wargame.ISoldat.TypesM;
+
+
 public class Obstacle extends Element {
->>>>>>> 7f43ae79166c23ddb1ca5e0d466989027490b953
+
+	
 	public enum TypeObstacle {
 		ROCHER (COULEUR_ROCHER), FORET (COULEUR_FORET), EAU (COULEUR_EAU);
 
@@ -23,14 +22,8 @@ public class Obstacle extends Element {
 		}
 	}
 	private TypeObstacle TYPE;
-<<<<<<< HEAD
-	Obstacle(TypeObstacle type, Position pos) {
-		TYPE = type; this.pos = pos;
-	}
-	public String toString() {
-		return ""+TYPE;
-	}
-=======
+
+	
 	
 	public Obstacle(){
         this.heros = false;
@@ -44,5 +37,5 @@ public class Obstacle extends Element {
 
 	 
 
->>>>>>> 7f43ae79166c23ddb1ca5e0d466989027490b953
+
 }

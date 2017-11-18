@@ -6,7 +6,8 @@ import wargame.ISoldat.TypesM;
 public class Carte implements ICarte, IConfig
 {
 	private Element tabElements[] = new Element[NB_HEROS + NB_MONSTRES + NB_OBSTACLES] ;
-
+	private ArmeeHeros armH=new ArmeeHeros();
+	private ArmeeMonstres armM=new ArmeeMonstres();
 
 	public Carte()
 	{ 
@@ -16,18 +17,12 @@ public class Carte implements ICarte, IConfig
 		}
 
 		// creer aleatoirement 41 elements different type : 6 h�ros, 15 monstres, 20 obstacles et les positionner aléatoirem
-		for (int i = 0; i < NB_HEROS ; i++) {
-			tabElements[i] = new Heros();
-			Position pos = trouvePositionVide();
-			tabElements[i].getPos().setX(pos.getX());
-			tabElements[i].getPos().setY(pos.getY());
-		}
-		for (int k = NB_HEROS; k < NB_HEROS + NB_MONSTRES; k++) {
-			tabElements[k] = new Monstres();
-			Position pos = trouvePositionVide();
-			tabElements[k].getPos().setX(pos.getX());
-			tabElements[k].getPos().setY(pos.getY());
-		}
+	
+		
+		placeSoldat(armH);
+		
+		placeSoldat(armM);
+		
 		for (int j = NB_HEROS + NB_MONSTRES; j < tabElements.length; j++)
 		{
 			tabElements[j] = new Obstacle();
@@ -35,13 +30,13 @@ public class Carte implements ICarte, IConfig
 			tabElements[j].getPos().setX(p.getX());
 			tabElements[j].getPos().setY(p.getY());
 		}
-		
+	/*	
 		// debug 
 		for (int i = 0; i < tabElements.length; i++)
 		{
 			System.out.println("( " + tabElements[i].getPos().getX() + ", " + tabElements[i].getPos().getY() + ")");
 		}
-
+*/
 	}
 	
 	public Element []getTabElements(){
@@ -69,6 +64,34 @@ public class Carte implements ICarte, IConfig
 		return (new Position(i,j));
 	}
 
+	public Position trouvePositionVide(int type)
+	{
+		boolean trouveVide = false;
+		int i=0, j=0;
+		
+		
+		
+		while (!trouveVide)
+		{	if (type==1)
+			{
+			i = (int)(Math.random()*LARGEUR_CARTE/2);
+			j = (int)(Math.random()*HAUTEUR_CARTE);
+			}
+		else
+		{	
+			i = (int)(Math.random()*LARGEUR_CARTE/2+(LARGEUR_CARTE/2));
+			j = (int)(Math.random()*HAUTEUR_CARTE);	
+		}
+			trouveVide = true;
+			for (int k = 0; k < tabElements.length; k++)
+			{
+				if (i == tabElements[k].getPos().getX() && j == tabElements[k].getPos().getY())
+					trouveVide = false;
+			}
+		}
+
+		return (new Position(i,j));
+	}
 
 	public Position trouvePositionVide(Position pos)
 	{
@@ -76,6 +99,34 @@ public class Carte implements ICarte, IConfig
 	}
 
 
+	public void placeSoldat(ArmeeHeros Arm)
+	{
+		
+		for (int i = 0; i < Arm.getListeSoldats().size() ; i++) {
+			
+			tabElements[i] =Arm.getListeSoldats().get(i);
+			Position pos = trouvePositionVide(1);
+			tabElements[i].getPos().setX(pos.getX());
+			tabElements[i].getPos().setY(pos.getY());
+		}
+		
+	}
+	
+	public void placeSoldat(ArmeeMonstres Arm)
+	{
+		
+		for (int i = 0; i < Arm.getListeSoldats().size() ; i++) {
+			System.out.println("i="+i);
+			
+			tabElements[NB_HEROS+i] =Arm.getListeSoldats().get(i);
+			Position pos = trouvePositionVide(2);
+			tabElements[NB_HEROS+i].getPos().setX(pos.getX());
+			tabElements[NB_HEROS+i].getPos().setY(pos.getY());
+			
+		}
+		
+	}
+	
 	public boolean estVide(Position pos)
 	{
 		for(int i = 0; i < tabElements.length; i++) {
@@ -199,5 +250,10 @@ public class Carte implements ICarte, IConfig
 		// dessine tout les elements sur la carte
 		for (int i = 0; i < tabElements.length; i++)
 			tabElements[i].seDessine(g);
-	}  
+	}
+	
+	
+	
+	
+	
 }
