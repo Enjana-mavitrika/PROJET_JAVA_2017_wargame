@@ -1,18 +1,20 @@
+package wargame;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 import java.awt.Font;
 
 public class PanneauJeu extends JPanel
 {
-    private CarteTest map ;		// la carte à dessiner
+    private Carte map ;		// la carte à dessiner
 
-    public PanneauJeu(CarteTest carte)
+    public PanneauJeu(Carte carte)
     {
 	map = carte;
     }
     
   public void paintComponent(Graphics g)
   {
-      map.seDessiner(g);
+      map.toutDessiner(g);
   }
+  public Carte getMap(){ return map; }
 }

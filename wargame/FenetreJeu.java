@@ -1,3 +1,4 @@
+package wargame;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import javax.swing.JButton;
@@ -11,7 +12,7 @@ public class FenetreJeu
   {
     // creation fenetre
     JFrame fenetre = new JFrame();
-    PanneauJeu conteneurBody = new PanneauJeu(new CarteTest());
+    PanneauJeu conteneurBody = new PanneauJeu(new Carte());
     JLabel messageHeader = new JLabel();
     JLabel infoFooter = new JLabel();
     JPanel conteneurHeader = new JPanel();
@@ -57,30 +58,17 @@ public class FenetreJeu
     // mise à jour footer
     infoFooter.setText("(" + 15 + "," + 14 + ") " + persos[0] + "(" + PV[0] + "PV/" + PVTotal[0] + ")");
     infoFooter.repaint();
+    
     // mise à jour header
-    messageHeader.setText("Il reste " + heros + " héros et " + monstres + " monstres");
+    messageHeader.setText("Il reste " + Heros.nbrHeros + " héros et " + Monstres.nbrMonstres + " monstres");
     messageHeader.repaint();
-
-    // exemple d'éxécution pour voir changement header
-    while (heros > 0 || monstres > 0)
-    {
-      // mise à jour header
-      messageHeader.setText("Il reste " + heros + " héros et " + monstres + " monstres");
-      messageHeader.repaint();
-      
-      // suspendre pendant 1 s
-      try{
-	Thread.sleep(1000);
-      }catch(InterruptedException e)
-      {
-	e.printStackTrace();
-      }
-      
-      if (monstres > 0)
-	monstres--;
-      if (heros > 0)
-	heros--;
-    }
+    
+    // tuer un héros sur la carte
+//    Carte carte = conteneurBody.getMap();
+//    try{
+//    	carte.mort((Soldat)carte.getElement(carte.getTabElements()[2].getPos()));
+//    }catch(MonException e){}
+//    conteneurBody.repaint();
 
     // Exemple execution pour voir changement Footer
     for (int i = 0; i < persos.length; i++)

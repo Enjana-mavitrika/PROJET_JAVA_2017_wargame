@@ -1,6 +1,13 @@
 package wargame;
 
+import java.awt.Graphics;
+
 public class Heros extends Soldat {
+	
+		// compteur de la classe Heros 
+		public static int nbrHeros = 0;
+		// numero heros courant
+		private final int numHeros;
         /**
          * typeH
          */
@@ -10,13 +17,13 @@ public class Heros extends Soldat {
          * @param nom
          * @param carte
          */
-        public Heros(String nom, Carte carte){
-            super(nom,carte);
-            this.heros=true;
+        public Heros(){
+            super.heros=true;
             this.typeH = TypesH.getTypeHAlea();
-            this.texture = typeH.getTexture();
+            this.texture = COULEUR_HEROS;
             vie=getVie();
             this.pointsDeVie=vie;
+            numHeros = ++nbrHeros; //mise à jour numéro et compteur
         }
         /**
          * getTypeName
@@ -35,6 +42,25 @@ public class Heros extends Soldat {
 
         public int getPortee(){
             return typeH.getPortee();
+        }
+        
+        // redefinition methode seDessine()
+        public void seDessine(Graphics g){
+        	if (enVie)
+        	{
+        		super.seDessine(g);
+        		g.setColor(COULEUR_TEXTE);
+        		int num = 'A' + numHeros - 1; // transformer numero en caractere A-Z
+        		g.drawString("" + (char)num, getPos().getX() * NB_PIX_CASE + NB_PIX_CASE / 4, getPos().getY() * NB_PIX_CASE + NB_PIX_CASE - NB_PIX_CASE / 4);
+        	}
+        }
+        
+     // redefinition methode baisserVie() pour decrementer le nombre de Heros en cas de mort
+        public void baisserVie(int points)
+        {
+        	super.baisserVie(points);
+        	if (pointsDeVie <= 0)
+        		nbrHeros --;
         }
 
 }

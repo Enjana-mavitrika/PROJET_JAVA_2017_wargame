@@ -1,5 +1,15 @@
 package wargame;
 
+<<<<<<< HEAD
+=======
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.Timer;
+
+>>>>>>> 7f43ae79166c23ddb1ca5e0d466989027490b953
     /**
      *
      * @version : 1.0
@@ -26,11 +36,10 @@ package wargame;
          * @param nom
          * @param carte
          */
-        public Soldat(String nom, Carte carte){
-            this.carte=carte;
-            this.num = nom;
-            vide = false;
-            this.setClickable(true);
+        public Soldat(){
+          
+            super();
+           // this.setClickable(true);
         }
         /**
          *
@@ -48,7 +57,7 @@ package wargame;
          * @param pos position du héros à attaquer/case sur laquelle aller
          * @return boolean -> True si l'attaque/déplacement s'est effectué, false sinon
          */
-        public boolean actionHeros(Position pos) {
+        /*public boolean actionHeros(Position pos) {
             if(!carte.getElement(pos).vide) {
 
                 if (carte.getElement(pos).estClickable()) {
@@ -70,6 +79,7 @@ package wargame;
             aJoueCeTour=true;
             return carte.deplaceSoldat(pos,this);
         }
+        */
 
 
         //@Override
@@ -97,8 +107,8 @@ package wargame;
          * @return true si attaque effectuee false si erreur
          */
         //@Override
-        public boolean combat(Soldat soldat) {
-            Monstre monstre;
+        public void combat(Soldat soldat) {
+            Monstres monstre;
             Heros heros;
 
             try{
@@ -109,17 +119,15 @@ package wargame;
                 }
                 else
                 {
-                    monstre = (Monstre) this;
+                    monstre = (Monstres) this;
                     if(this.estAPortee(soldat.getPos()))
                         soldat.baisserVie((int)(Math.random()*monstre.getTypeM().getPuissance())+1);
                     this.combatM=true;
                 }
 
-                return true;
             }catch (Exception e)
             {
                 System.out.println(e.getStackTrace());
-                return false;
             }
 
         }
@@ -128,9 +136,8 @@ package wargame;
         /**
          * @param
          */
-        public void deplaceSoldat(Position newPos) {
-            this.deplace=true;
-            this.carte.deplaceSoldat(newPos,this);
+        public void seDeplace(Position newPos) {
+            this.pos = newPos;
         }
 
         public int getVieCourante(){
@@ -143,9 +150,10 @@ package wargame;
                 this.pointsDeVie-=points;
             if(this.pointsDeVie <= 0) {
                 this.enVie = false;
-                mort();
             }
         }
+        
+        
         public void setAJoueCeTour(boolean bool)
         {
             this.aJoueCeTour=bool;
@@ -176,12 +184,6 @@ package wargame;
             return false;
         }
 
-        public void mort(){
-            this.carte.getGrille()[this.getPos().getX()][this.getPos().getY()].setElement(new Element());
-        }
-
-        //public boolean estHeros(){return this.heros;}
-        //public boolean estMonstre(){return this.monstre;}
         public boolean estEnVie()
         {
             return this.enVie;
