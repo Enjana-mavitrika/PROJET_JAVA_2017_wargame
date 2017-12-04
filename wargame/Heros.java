@@ -61,6 +61,7 @@ public class Heros extends Soldat {
         	super.baisserVie(points);
         	if (pointsDeVie <= 0)
         		nbrHeros --;
+        	System.out.println("NBR HEROS  = " + nbrHeros);
         }
 
 }

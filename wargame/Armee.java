@@ -1,11 +1,13 @@
 package wargame;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 /**
  * @author: KOMAH
  * @version : 1.0
  */
-public class Armee implements IConfig{
+public class Armee implements IConfig, Serializable
+{
 	/**
 	 * listeSoldats
 	 * carte

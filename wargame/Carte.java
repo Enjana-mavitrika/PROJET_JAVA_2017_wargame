@@ -1,9 +1,10 @@
 package wargame;
 import java.awt.Graphics;
+import java.io.Serializable;
 import java.lang.Math;
 
-import wargame.ISoldat.TypesM;
-public class Carte implements ICarte, IConfig
+
+public class Carte implements ICarte, IConfig, Serializable
 {
 	private Element tabElements[] = new Element[NB_HEROS + NB_MONSTRES + NB_OBSTACLES] ;
 	private ArmeeHeros armH=new ArmeeHeros();
@@ -42,6 +43,7 @@ public class Carte implements ICarte, IConfig
 	public Element []getTabElements(){
 		return tabElements;
 	}
+
 
 
 	public Position trouvePositionVide()
@@ -92,6 +94,17 @@ public class Carte implements ICarte, IConfig
 
 		return (new Position(i,j));
 	}
+	
+	public boolean estVide(Position pos) 
+	{
+		boolean vide = true;
+		for (int i = 0; i  < tabElements.length; i++) {
+			if (tabElements[i].getPos().getX() == pos.getX() && tabElements[i].getPos().getY() == pos.getY())
+				vide = false;
+		}
+		
+		return vide;
+	}
 
 	public Position trouvePositionVide(Position pos)
 	{
@@ -126,54 +139,10 @@ public class Carte implements ICarte, IConfig
 		}
 		
 	}
+
 	
-	public boolean estVide(Position pos)
-	{
-		for(int i = 0; i < tabElements.length; i++) {
-			if (tabElements[i].getPos().getX() == pos.getX() && tabElements[i].getPos().getY() == pos.getY())
-				return false;
-		}
-		return true;
-	}
-
-	/*
-    public boolean estVide(Position pos)
-    {
-    	Element el = new Element();
-    	try {
-    		el = getElement(pos);
-    		return false;
-    	}
-    	catch(MonException e) {
-    		return true;
-    	}
-    }
-
-	 */
 
 
-	// dessine chaque element sur la carte 
-	public void seDessiner(Graphics g)
-	{
-
-		// affichage carte vide
-
-		// grille vide
-		g.setColor(IConfig.COULEUR_VIDE);
-		for (int y = 0; y < IConfig.HAUTEUR_CARTE * IConfig.NB_PIX_CASE; y += IConfig.NB_PIX_CASE)
-		{
-			for (int x = 0; x <= IConfig.LARGEUR_CARTE * IConfig.NB_PIX_CASE; x += IConfig.NB_PIX_CASE)
-				g.drawRect(x, y, IConfig.NB_PIX_CASE, IConfig.NB_PIX_CASE);
-		}
-
-		// grille fin 
-
-
-		for (int i = 0; i < tabElements.length; i++)
-
-			tabElements[i].seDessine(g);
-
-	}
 
 
 
@@ -223,7 +192,7 @@ public class Carte implements ICarte, IConfig
 
 	public void mort(Soldat perso)
 	{
-		perso.seDeplace(new Position(-1, -1)); // deplacer perso hors de la carte
+		perso.seDeplace(new Position(-150, -150)); // deplacer perso hors de la carte
 	}
 
 	public boolean actionHeros(Position pos, Position pos2)
@@ -248,8 +217,16 @@ public class Carte implements ICarte, IConfig
 
 
 		// dessine tout les elements sur la carte
-		for (int i = 0; i < tabElements.length; i++)
+		for (int i = 0; i < tabElements.length; i++) 
+		{
+			if (tabElements[i] instanceof Soldat)
+			{
+				Soldat soldat = (Soldat)tabElements[i];
+				if (!soldat.enVie)
+					this.mort(soldat);
+			}
 			tabElements[i].seDessine(g);
+		}
 	}
 	
 	

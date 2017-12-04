@@ -1,7 +1,8 @@
 package wargame;
 import java.awt.Color;
 import java.awt.Graphics;
-public class Element implements IConfig
+import java.io.Serializable;
+public class Element implements IConfig, Serializable
 {
 
 protected Color texture;

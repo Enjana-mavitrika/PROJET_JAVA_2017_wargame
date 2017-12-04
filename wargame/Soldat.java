@@ -113,13 +113,13 @@ import javax.swing.Timer;
             try{
                 if(this.heros) {
                     heros = (Heros) this;
-                    if(this.estAPortee(soldat.getPos()))
+                    if(this.estAPortee(soldat.getPos()) && soldat.enVie)
                         soldat.baisserVie((int)(Math.random()*heros.getTypeH().getPuissance())+1);
                 }
                 else
                 {
                     monstre = (Monstres) this;
-                    if(this.estAPortee(soldat.getPos()))
+                    if(this.estAPortee(soldat.getPos()) && soldat.enVie)
                         soldat.baisserVie((int)(Math.random()*monstre.getTypeM().getPuissance())+1);
                     this.combatM=true;
                 }
@@ -149,7 +149,10 @@ import javax.swing.Timer;
                 this.pointsDeVie-=points;
             if(this.pointsDeVie <= 0) {
                 this.enVie = false;
+                this.seDeplace(new Position(-150,-150));
+                System.out.println("SE DEPLACE EN DEHORS DU CADRE");
             }
+            System.out.println("BAISSER VIE de " + points);
         }
         
         

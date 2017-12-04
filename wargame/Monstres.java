@@ -63,6 +63,7 @@ public class Monstres extends Soldat{
         	super.baisserVie(points);
         	if (pointsDeVie <= 0)
         		nbrMonstres --;
+        	System.out.println("NBR MONSTRES  = " + nbrMonstres);
         }
 
     

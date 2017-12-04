@@ -1,108 +1,35 @@
 package wargame;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
-public class FenetreJeu
-{
-  public static void main(String args[])
-  {
-    // creation fenetre
-    JFrame fenetre = new JFrame();
-    PanneauJeu conteneurBody = new PanneauJeu(new Carte());
-    JLabel messageHeader = new JLabel();
-    JLabel infoFooter = new JLabel();
-    JPanel conteneurHeader = new JPanel();
-    JPanel conteneurPrincipale = new JPanel();
-    JButton boutonFinTour = new JButton("Fin du tour");
-    GridLayout glConteneurHeader = new GridLayout(1, 2);
+public class FenetreJeu extends JFrame {
 
-    // panneau HEADER
-    conteneurHeader.setLayout(glConteneurHeader);
-    glConteneurHeader.setHgap(10);
-    conteneurHeader.add(boutonFinTour);
-    conteneurHeader.add(messageHeader);
-
-
-    // panneau BODY
-    conteneurBody.setSize(IConfig.LARGEUR_CARTE * IConfig.NB_PIX_CASE, IConfig.HAUTEUR_CARTE * IConfig.NB_PIX_CASE);
-
-    // conteneur MAIN
-    conteneurPrincipale.setLayout(new BorderLayout());
-    conteneurPrincipale.add(conteneurHeader, BorderLayout.NORTH);
-    conteneurPrincipale.add(conteneurBody, BorderLayout.CENTER);
-    conteneurPrincipale.add(infoFooter, BorderLayout.SOUTH);
-    
-    
-    
-    fenetre.setTitle("Wargame");
-    fenetre.setSize(IConfig.LARGEUR_CARTE * IConfig.NB_PIX_CASE, IConfig.HAUTEUR_CARTE * IConfig.NB_PIX_CASE + 50); 
-    fenetre.setLocation(IConfig.POSITION_X, IConfig.POSITION_Y);
-    fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    fenetre.setAlwaysOnTop(true);
-    fenetre.setResizable(false);
-    fenetre.setContentPane(conteneurPrincipale);
-    // affichage fenetre
-  
-    fenetre.setVisible(true);
-    
-
-    //*** mise à jour fenetre****
-
-    int heros = 6, monstres = 15;
-    String persos[] = {"HOBBIT", "ELF", "ORC", "NAIN"};
-    int PV[] =        {  5,       25,     15,   20   };
-    int PVTotal[] =   {  5,       25,     15,   20   };
-    // mise à jour footer
-    infoFooter.setText("(" + 15 + "," + 14 + ") " + persos[0] + "(" + PV[0] + "PV/" + PVTotal[0] + ")");
-    infoFooter.repaint();
-    
-    // mise à jour header
-    messageHeader.setText("Il reste " + Heros.nbrHeros + " héros et " + Monstres.nbrMonstres + " monstres");
-    messageHeader.repaint();
-    
-    // tuer un héros sur la carte
-//    Carte carte = conteneurBody.getMap();
-//    try{
-//    	carte.mort((Soldat)carte.getElement(carte.getTabElements()[2].getPos()));
-//    }catch(MonException e){}
-//    conteneurBody.repaint();
-
-    // Exemple execution pour voir changement Footer
-    for (int i = 0; i < persos.length; i++)
-    {
-      // mise à jour footer
-      infoFooter.setText("(" + 15 + "," + 14 + ") " + persos[i] + "(" + PV[i] + "PV/" + PVTotal[i] + ")");
-      infoFooter.repaint();
-      // suspendre pendant 1 s
-      try{
-	Thread.sleep(1000);
-      }catch(InterruptedException e)
-      {
-	e.printStackTrace();
-      }
-    }
-    
-//TEEEEEEEEEEEEST    
-    /*combat et tuer un monstre
-    Element Tab[]=conteneurBody.getMap().getTabElements();
-Tab[0].getPos().setX(0);
-Tab[0].getPos().setY(0);
-Tab[7].getPos().setX(0);
-Tab[7].getPos().setY(1);
-
-Heros H1=(Heros)Tab[0];
-Monstres M1=(Monstres)Tab[7];
-while(M1.pointsDeVie>0)
-{
-System.out.println("AVANT:"+M1.pointsDeVie);
-H1.combat(M1);
-System.out.println("APRES:"+M1.pointsDeVie);
-}*/
-conteneurBody.repaint();
-  }
-
+	PanneauJeu panJeu;
+	public  FenetreJeu() {
+		panJeu = new PanneauJeu();
+		setTitle("Wargame");
+		this.setPreferredSize(new Dimension(IConfig.LARGEUR_CARTE * IConfig.NB_PIX_CASE, IConfig.HAUTEUR_CARTE * IConfig.NB_PIX_CASE + 50)); 
+		setLocation(IConfig.POSITION_X, IConfig.POSITION_Y);
+		setContentPane(panJeu);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setAlwaysOnTop(true);
+		setResizable(false);
+		pack();
+	}
+	
+	public PanneauJeu getPanJeu() {return panJeu;}
 }
