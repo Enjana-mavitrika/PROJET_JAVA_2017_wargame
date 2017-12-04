@@ -20,6 +20,8 @@ public class PanneauCarte extends JPanel implements IConfig {
 	      map.toutDessiner(g);
 	  }
 	  public Carte getMap(){ return map; }
+
 	  public void setMap(Carte map) {this.map = map;}
+
 
 }

@@ -26,7 +26,7 @@ public class PanneauJeu extends JPanel {
 	private JPanel conteneurPrincipale;
 		
 	private PanneauCarte conteneurCarte ;
-	
+
 	public PanneauJeu() {
 		super();
 		
@@ -121,7 +121,9 @@ public class PanneauJeu extends JPanel {
 						try {
 							FileOutputStream fichierEntree = new FileOutputStream("wargame.ser");
 							ObjectOutputStream fichierSorti = new ObjectOutputStream(fichierEntree);
+
 							fichierSorti.writeObject(conteneurCarte.getMap());
+
 							fichierSorti.flush();
 							fichierSorti.close();
 						} catch (FileNotFoundException e) {
@@ -137,7 +139,6 @@ public class PanneauJeu extends JPanel {
 	}
 	
 	public PanneauCarte getConteneurCarte() {return conteneurCarte;}
-	
-	
+
 }
 
