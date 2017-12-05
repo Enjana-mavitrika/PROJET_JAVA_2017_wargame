@@ -21,7 +21,6 @@ public class MonMain{
 	    	darkVador.jouerMonstre(fenetre.getPanJeu());
 	    }
 
-
 	}
 
 }

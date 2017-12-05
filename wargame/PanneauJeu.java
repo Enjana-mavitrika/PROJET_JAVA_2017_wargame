@@ -5,6 +5,8 @@ import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -26,7 +28,10 @@ public class PanneauJeu extends JPanel {
 	private JPanel conteneurPrincipale;
 		
 	private PanneauCarte conteneurCarte ;
-
+	
+	private Position p = new Position(0,0); // utiliser pour sauvegarder la position du souris
+	private Soldat s; // utiliser pour sauvegarder le soldat courant
+	
 	public PanneauJeu() {
 		super();
 		
@@ -61,31 +66,27 @@ public class PanneauJeu extends JPanel {
 		this.add(conteneurHeader, BorderLayout.NORTH);
 		this.add(infoFooter, BorderLayout.SOUTH);
 		
-		int heros = 6, monstres = 15;
+		// gestion affichage info footer
+		addMouseMotionListener(new MouseMotionAdapter() {
+			public void mouseMoved(MouseEvent e) {
+				p.setX(e.getX());p.setY(e.getY());
+				try {
+					s = (Soldat)conteneurCarte.getMap().getElement(p);
+				} catch (MonException e1) {
+					// TODO Auto-generated catch block
+					//e1.printStackTrace();
+				}
+				// mise à jour footer
+				infoFooter.setText(s.toString());
+				infoFooter.repaint();
+			}
+		});
 		
-		String persos[] = {"HOBBIT", "ELF", "ORC", "NAIN"};
-		int PV[] =        {  5,       25,     15,   20   };
-		int PVTotal[] =   {  5,       25,     15,   20   };
-		// mise à jour footer
-		infoFooter.setText("(" + 15 + "," + 14 + ") " + persos[0] + "(" + PV[0] + "PV/" + PVTotal[0] + ")");
-		infoFooter.repaint();
 
 		// mise à jour header
 		messageHeader.setText("Il reste " + Heros.nbrHeros + " héros et " + Monstres.nbrMonstres + " monstres");
 		messageHeader.repaint();
-		for (int i = 0; i < persos.length; i++)
-		{
-			// mise à jour footer
-			infoFooter.setText("(" + 15 + "," + 14 + ") " + persos[i] + "(" + PV[i] + "PV/" + PVTotal[i] + ")");
-			infoFooter.repaint();
-			// suspendre pendant 1 s
-			try{
-				Thread.sleep(1000);
-			}catch(InterruptedException e)
-			{
-				e.printStackTrace();
-			}
-		}
+		
 		
 		
 		
@@ -121,9 +122,7 @@ public class PanneauJeu extends JPanel {
 						try {
 							FileOutputStream fichierEntree = new FileOutputStream("wargame.ser");
 							ObjectOutputStream fichierSorti = new ObjectOutputStream(fichierEntree);
-
 							fichierSorti.writeObject(conteneurCarte.getMap());
-
 							fichierSorti.flush();
 							fichierSorti.close();
 						} catch (FileNotFoundException e) {
@@ -139,6 +138,7 @@ public class PanneauJeu extends JPanel {
 	}
 	
 	public PanneauCarte getConteneurCarte() {return conteneurCarte;}
-
+	
+	
 }
 

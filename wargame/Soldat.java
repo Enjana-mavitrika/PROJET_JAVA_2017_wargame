@@ -194,4 +194,8 @@ import javax.swing.Timer;
         public abstract String getTypeName();
         public abstract int getVie();
         public abstract int getPortee();
+        public String toString() 
+        {
+        	return getPos() + " " + this.getTypeName() + " ( " + this.getVieCourante() + "/" + this.getVie() + " )";
+        }
     }

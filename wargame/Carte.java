@@ -152,7 +152,8 @@ public class Carte implements ICarte, IConfig, Serializable
 	{
 		for (int i=0; i < tabElements.length; i++)
 		{
-			if (tabElements[i].getPos().getX() == pos.getX() && tabElements[i].getPos().getX() == pos.getX())
+			if (pos.getX() >= tabElements[i].getPos().getX() * NB_PIX_CASE && pos.getX() <= tabElements[i].getPos().getX() * NB_PIX_CASE + NB_PIX_CASE && 
+					pos.getY() >= tabElements[i].getPos().getY() * NB_PIX_CASE + NB_PIX_CASE && pos.getY() <= tabElements[i].getPos().getY() * NB_PIX_CASE + (NB_PIX_CASE * 2))
 				return tabElements[i]; 
 		}
 		throw new MonException(tabElements, pos);
