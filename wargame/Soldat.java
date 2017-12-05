@@ -30,6 +30,8 @@ import javax.swing.Timer;
         protected Carte carte;
         boolean combatM=false;
         boolean deplace=false;
+        boolean boss=false;
+      public  int porteeTotale=0;
         /**
          * Soldat, constructeur Soldat
          * @param nom
@@ -196,6 +198,7 @@ import javax.swing.Timer;
         public abstract int getPortee();
         public String toString() 
         {
-        	return getPos() + " " + this.getTypeName() + " ( " + this.getVieCourante() + "/" + this.getVie() + " )";
+        	return getPos() + " " + this.getTypeName() + " ( " + this.getVieCourante() + "/" + this.getVie() + " ) PTotale=(" 
+        	+this.porteeTotale	+") Boss?("+this.boss+")";
         }
     }

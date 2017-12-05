@@ -71,11 +71,19 @@ public class PanneauJeu extends JPanel {
 			public void mouseMoved(MouseEvent e) {
 				p.setX(e.getX());p.setY(e.getY());
 				try {
+					if ((conteneurCarte.getMap().getElement(p)) instanceof Soldat)
+					{
 					s = (Soldat)conteneurCarte.getMap().getElement(p);
-				} catch (MonException e1) {}
+					}
+					} catch (MonException e1) {
+					// TODO Auto-generated catch block
+					//e1.printStackTrace();
+				}
 				// mise à jour footer
+				if (s!=null ) {
 				infoFooter.setText(s.toString());
 				infoFooter.repaint();
+				}
 			}
 		});
 		

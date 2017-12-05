@@ -1,5 +1,6 @@
 package wargame;
 import java.awt.Graphics;
+import java.io.IOException;
 import java.io.Serializable;
 import java.lang.Math;
 
@@ -23,6 +24,8 @@ public class Carte implements ICarte, IConfig, Serializable
 		placeSoldat(armH);
 		
 		placeSoldat(armM);
+		
+		choisirBoss();
 		
 		for (int j = NB_HEROS + NB_MONSTRES; j < tabElements.length; j++)
 		{
@@ -231,6 +234,69 @@ public class Carte implements ICarte, IConfig, Serializable
 	}
 	
 	
+	public void choisirBoss()
+	{
+		int	maxH=0;
+		int maxM=0;
+		int indBH=0;
+		int indBM=0;
+		int sommeVH=0;
+		int sommeVM=0;
+		
+		Heros H;
+		Monstres M;
+		
+		for (int i = 0; i < tabElements.length; i++) 
+		{ 	
+				System.out.println("ici"+i+":----"+tabElements[i].getPos());
+				
+				
+				
+				if (tabElements[i] instanceof Soldat)
+			{ 	
+				Soldat soldat = (Soldat)tabElements[i];
+				if (soldat instanceof Heros)	{ 
+					sommeVH +=soldat.getPortee();
+					
+					if (soldat.getPortee()>=maxH) { maxH=soldat.getPortee(); indBH=i; }
+				}
+
+				if (soldat instanceof Monstres) {
+					sommeVM +=soldat.getPortee();
+					if (soldat.getPortee()>=maxM) { maxM=soldat.getPortee(); indBM=i; }
+				}
+
+			}
+
+		}
+
+		System.out.println("indBH"+indBH);
+		System.out.println("indBM"+indBM);
+
+		
+		if (tabElements[indBH] instanceof Heros)
+		{ 	
+			H=(Heros)tabElements[indBH];
+			H.boss=true;
+			H.porteeTotale=sommeVH;
+
+		}
+
+		if (tabElements[indBM] instanceof Monstres)
+		{ 	
+			M=(Monstres)tabElements[indBM];
+			M.boss=true;
+			M.porteeTotale=sommeVM;
+
+		}
+
+	
+		
+		
+		
+
+	}
+
 	
 	
 	

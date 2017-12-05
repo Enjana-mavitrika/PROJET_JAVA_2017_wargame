@@ -22,7 +22,7 @@ public class FenetreJeu extends JFrame {
 	public  FenetreJeu() {
 		panJeu = new PanneauJeu();
 		setTitle("Wargame");
-		this.setPreferredSize(new Dimension(IConfig.LARGEUR_CARTE * IConfig.NB_PIX_CASE, IConfig.HAUTEUR_CARTE * IConfig.NB_PIX_CASE + 50)); 
+		this.setPreferredSize(new Dimension(IConfig.LARGEUR_CARTE * IConfig.NB_PIX_CASE , IConfig.HAUTEUR_CARTE * IConfig.NB_PIX_CASE + 100)); 
 		setLocation(IConfig.POSITION_X, IConfig.POSITION_Y);
 		setContentPane(panJeu);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

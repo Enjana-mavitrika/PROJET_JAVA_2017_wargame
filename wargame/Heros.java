@@ -1,6 +1,10 @@
 package wargame;
 
 import java.awt.Graphics;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class Heros extends Soldat {
 	
@@ -21,6 +25,12 @@ public class Heros extends Soldat {
             super.heros=true;
             this.typeH = TypesH.getTypeHAlea();
             this.texture = COULEUR_HEROS;
+            try {
+				this.img= ImageIO.read(new File("C:\\Users\\Oussema\\eclipse-workspace\\P_F\\src\\wargame\\images\\Capitane.PNG"));
+			} catch (IOException e) {
+			
+				e.printStackTrace();
+			}
             vie=getVie();
             this.pointsDeVie=vie;
             numHeros = ++nbrHeros; //mise à jour numéro et compteur
@@ -44,14 +54,21 @@ public class Heros extends Soldat {
             return typeH.getPortee();
         }
         
+        public void setPortee(int p){
+             typeH.setPortee(p);
+        }
+        
         // redefinition methode seDessine()
         public void seDessine(Graphics g){
         	if (enVie)
         	{
-        		super.seDessine(g);
+        		//super.seDessine(g);
+        		
         		g.setColor(COULEUR_TEXTE);
         		int num = 'A' + numHeros - 1; // transformer numero en caractere A-Z
         		g.drawString("" + (char)num, getPos().getX() * NB_PIX_CASE + NB_PIX_CASE / 4, getPos().getY() * NB_PIX_CASE + NB_PIX_CASE - NB_PIX_CASE / 4);
+        		
+        		g.drawImage(img,pos.getX() * NB_PIX_CASE,pos.getY() * NB_PIX_CASE,NB_PIX_CASE,NB_PIX_CASE,null);
         	}
         }
         

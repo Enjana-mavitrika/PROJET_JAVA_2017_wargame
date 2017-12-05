@@ -1,6 +1,7 @@
 package wargame;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.io.Serializable;
 public class Element implements IConfig, Serializable
 {
@@ -11,6 +12,7 @@ protected boolean vide;
 protected boolean heros;
 protected boolean monstre;
 protected boolean obstacle;
+protected Image img;
 
 public Element()
 {

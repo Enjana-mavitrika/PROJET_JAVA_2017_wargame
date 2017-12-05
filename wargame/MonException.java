@@ -12,7 +12,7 @@ public class MonException extends Exception {
 			{
 			}
 			else {
-				System.out.println("case vide !!");
+		//		System.out.println("case vide !!");
 			}
 		}
 	}

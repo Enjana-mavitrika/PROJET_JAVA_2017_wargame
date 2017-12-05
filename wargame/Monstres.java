@@ -47,6 +47,11 @@ public class Monstres extends Soldat{
             return typeM.getPortee();
         }
         
+     
+        public void setPortee(int p){
+            typeM.setPortee(p);
+       }
+        
         // redefinition methode seDessine() pour dessiner son numero
         public void seDessine(Graphics g){
         	if (enVie)
