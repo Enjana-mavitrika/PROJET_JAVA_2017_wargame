@@ -19,8 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class PanneauJeu extends JPanel {
-	private JLabel messageHeader;
-	
+	private JLabel messageHeader;	
 	private JLabel infoFooter ;
 	
 	private JPanel conteneurHeader ;
@@ -72,16 +71,19 @@ public class PanneauJeu extends JPanel {
 				p.setX(e.getX());p.setY(e.getY());
 				try {
 					s = (Soldat)conteneurCarte.getMap().getElement(p);
-				} catch (MonException e1) {}
-				// mise √† jour footer
+				} catch (MonException e1) {
+					// TODO Auto-generated catch block
+					//e1.printStackTrace();
+				}
+				// mise Å‡ jour footer
 				infoFooter.setText(s.toString());
 				infoFooter.repaint();
 			}
 		});
 		
 
-		// mise √† jour header
-		messageHeader.setText("Il reste " + Heros.nbrHeros + " h√©ros et " + Monstres.nbrMonstres + " monstres");
+		// mise Å‡ jour header
+		messageHeader.setText("Il reste " + Heros.nbrHeros + " hÅÈros et " + Monstres.nbrMonstres + " monstres");
 		messageHeader.repaint();
 		
 		
