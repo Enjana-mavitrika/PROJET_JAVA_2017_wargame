@@ -1,6 +1,12 @@
 package wargame;
 
 import java.awt.Graphics;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+import wargame.ISoldat.TypesH;
 
 public class Monstres extends Soldat{
 		// compteur de monstres
@@ -22,6 +28,18 @@ public class Monstres extends Soldat{
             this.monstre=true;
             this.typeM = TypesM.getTypeMAlea();
             this.texture = COULEUR_MONSTRES;
+            try {
+            	if (this.typeM==TypesM.GOBELIN) {this.img= ImageIO.read(new File("images/Monstres/Gobbelin1.png"));}
+            	if (this.typeM==TypesM.ORC) {this.img= ImageIO.read(new File("images/Monstres/Orc1.png"));}
+            	if (this.typeM==TypesM.TROLL) {this.img= ImageIO.read(new File("images/Monstres/Troll1.png"));}
+            	
+				
+            	
+            	} catch (IOException e) {
+			
+				e.printStackTrace();
+			}
+            
             vie=getVie();
             this.pointsDeVie=vie;
             numMonstres = ++nbrMonstres; //mise à jour compteur et numero monstres
@@ -56,9 +74,10 @@ public class Monstres extends Soldat{
         public void seDessine(Graphics g){
         	if (enVie)
         	{
-        		super.seDessine(g);
+        		//super.seDessine(g);
         		g.setColor(COULEUR_VIDE);
         		g.drawString("" + numMonstres, getPos().getX() * NB_PIX_CASE + NB_PIX_CASE / 8, getPos().getY() * NB_PIX_CASE + + NB_PIX_CASE - NB_PIX_CASE / 4);
+        		g.drawImage(img,pos.getX() * NB_PIX_CASE,pos.getY() * NB_PIX_CASE,NB_PIX_CASE,NB_PIX_CASE,null);
         	}
         }
         

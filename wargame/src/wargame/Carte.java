@@ -1,18 +1,24 @@
 package wargame;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.lang.Math;
+
+import javax.imageio.ImageIO;
 
 
 public class Carte implements ICarte, IConfig, Serializable
 {
 	private Element tabElements[] = new Element[NB_HEROS + NB_MONSTRES + NB_OBSTACLES] ;
 	private ArmeeHeros armH=new ArmeeHeros();
-	private ArmeeMonstres armM=new ArmeeMonstres();
+	private ArmeeMonstres armM=new ArmeeMonstres(); 
+	private boolean indmap=false;
+	private Image img = null;
 
 	public Carte()
-	{ 
+	{  
 		for(int x=0;x<tabElements.length;x++)
 		{
 			tabElements[x]=new Element(); 
@@ -210,13 +216,33 @@ public class Carte implements ICarte, IConfig, Serializable
 	}
 
 	public void toutDessiner(Graphics g)
-	{
+	{	int rd;
+		
+			
+		if (this.indmap==false) {
+		try {
+			rd=(int)(Math.random() * (5));
+			if (rd==0) {this.img= ImageIO.read(new File("images/Background/Desert1.png"));this.indmap=true;}
+			if (rd==1) {this.img= ImageIO.read(new File("images/Background/Gazon1.png"));this.indmap=true;}
+			if (rd==2) {this.img= ImageIO.read(new File("images/Background/Gazon2.png"));this.indmap=true;}
+			if (rd==3) {this.img= ImageIO.read(new File("images/Background/Gazon4.png"));this.indmap=true;}
+			if (rd==4) {this.img= ImageIO.read(new File("images/Background/Gazon5.png"));this.indmap=true;}
+			if (rd==5) {this.img= ImageIO.read(new File("images/Background/Piere1.png"));this.indmap=true;}
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
 		// affichage carte vide
 		g.setColor(IConfig.COULEUR_VIDE);
 		for (int y = 0; y < IConfig.HAUTEUR_CARTE * IConfig.NB_PIX_CASE; y += IConfig.NB_PIX_CASE)
 		{
 			for (int x = 0; x <= IConfig.LARGEUR_CARTE * IConfig.NB_PIX_CASE; x += IConfig.NB_PIX_CASE)
-				g.drawRect(x, y, IConfig.NB_PIX_CASE, IConfig.NB_PIX_CASE);
+			{
+				g.drawRect(x, y, IConfig.NB_PIX_CASE, IConfig.NB_PIX_CASE);	
+			g.drawImage(img,x, y,IConfig.NB_PIX_CASE,IConfig.NB_PIX_CASE,null);
+			}	
 		}
 
 

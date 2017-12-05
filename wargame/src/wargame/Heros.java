@@ -16,6 +16,7 @@ public class Heros extends Soldat {
          * typeH
          */
         TypesH typeH;
+        
         /**
          * Heros:
          * @param nom
@@ -25,9 +26,35 @@ public class Heros extends Soldat {
             super.heros=true;
             this.typeH = TypesH.getTypeHAlea();
             this.texture = COULEUR_HEROS;
+            int rd;
             try {
-				this.img= ImageIO.read(new File("C:\\Users\\Oussema\\eclipse-workspace\\P_F\\src\\wargame\\images\\Capitane.PNG"));
-			} catch (IOException e) {
+            	
+            	if (this.typeH==TypesH.HUMAIN) {
+            		
+            	rd=(int)(Math.random() * (2));
+            	if(rd==0) {this.img= ImageIO.read(new File("images/Heros/Humain1.png"));}
+            	if(rd==1) {this.img= ImageIO.read(new File("images/Heros/Humain2.png"));}
+            	if(rd==2) {this.img= ImageIO.read(new File("images/Heros/Humain3.png"));}
+            	
+            	}
+            	
+            	if (this.typeH==TypesH.ELF) {
+            		rd=(int)(Math.random() * (1));
+                	if(rd==0) {this.img= ImageIO.read(new File("images/Heros/Elf1.png"));}
+                	if(rd==1) {this.img= ImageIO.read(new File("images/Heros/Elf2.png"));}
+                
+            	
+            	}
+            	if (this.typeH==TypesH.NAIN) {
+            		rd=(int)(Math.random() * (1));
+                	if(rd==0) {this.img= ImageIO.read(new File("images/Heros/Nain1.png"));}
+                	if(rd==1) {this.img= ImageIO.read(new File("images/Heros/Nain2.png"));}
+                	
+            	}
+            	if (this.typeH==TypesH.HOBBIT) {this.img= ImageIO.read(new File("images/Heros/Hobbit1.png"));}
+				
+            	
+            	} catch (IOException e) {
 			
 				e.printStackTrace();
 			}
