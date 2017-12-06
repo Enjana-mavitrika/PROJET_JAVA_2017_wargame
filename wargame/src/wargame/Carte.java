@@ -215,6 +215,11 @@ public class Carte implements ICarte, IConfig, Serializable
 
 	}
 
+	public void setBack()
+	{
+	this.indmap=false;
+	}
+	
 	public void toutDessiner(Graphics g)
 	{	int rd;
 		
@@ -227,7 +232,7 @@ public class Carte implements ICarte, IConfig, Serializable
 			if (rd==2) {this.img= ImageIO.read(new File("images/Background/Gazon2.png"));this.indmap=true;}
 			if (rd==3) {this.img= ImageIO.read(new File("images/Background/Gazon4.png"));this.indmap=true;}
 			if (rd==4) {this.img= ImageIO.read(new File("images/Background/Gazon5.png"));this.indmap=true;}
-			if (rd==5) {this.img= ImageIO.read(new File("images/Background/Piere1.png"));this.indmap=true;}
+			if (rd==5) {this.	img= ImageIO.read(new File("images/Background/Piere1.png"));this.indmap=true;}
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

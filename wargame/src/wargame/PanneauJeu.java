@@ -48,8 +48,11 @@ public class PanneauJeu extends JPanel {
 		JButton boutonFinTour = new JButton("Fin du tour");
 		JButton boutonEnregistrement = new JButton(" Sauvegarder-Partie");
 		JButton boutonRestauration = new JButton(" Restauration-Partie") ;
+		JButton boutonBack = new JButton("Changer-Background") ;
 		
-		GridLayout glConteneurHeader = new GridLayout(1, 2);
+
+		
+		GridLayout glConteneurHeader = new GridLayout(1, 9);
 
 		// panneau HEADER
 		conteneurHeader.setLayout(glConteneurHeader);
@@ -57,6 +60,9 @@ public class PanneauJeu extends JPanel {
 		conteneurHeader.add(boutonFinTour);
 		conteneurHeader.add(boutonEnregistrement);
 		conteneurHeader.add(boutonRestauration);
+		
+		conteneurHeader.add(boutonBack);
+		
 		conteneurHeader.add(messageHeader);
 		
 		this.setLayout(new BorderLayout());
@@ -138,6 +144,17 @@ public class PanneauJeu extends JPanel {
 					}
 				});
 				
+				// action changer la background
+				boutonBack.addActionListener(new ActionListener(){
+					public void actionPerformed(ActionEvent agr){
+						
+						Carte carte=conteneurCarte.getMap();
+						carte.setBack();
+						
+					}
+				});
+				
+			
 				
 				
 	}
