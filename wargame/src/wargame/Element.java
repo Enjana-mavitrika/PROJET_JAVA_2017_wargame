@@ -43,6 +43,7 @@ public Element()
   }
   
   
+  
   public void seDessine(Graphics g)
   {
 	  

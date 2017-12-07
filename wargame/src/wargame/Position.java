@@ -15,6 +15,10 @@ public class Position implements IConfig, Serializable
 	}
 	public String toString() { return "("+x+","+y+")"; }
 	public boolean estVoisine(Position pos) {
+		
 		return ((Math.abs(x-pos.x)<=1) && (Math.abs(y-pos.y)<=1));
 	}
+	
+	
+	
 }

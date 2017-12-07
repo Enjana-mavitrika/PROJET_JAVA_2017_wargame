@@ -2,8 +2,12 @@ package wargame;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
+
+
 
 public class PanneauCarte extends JPanel implements IConfig {
 	
@@ -13,7 +17,11 @@ public class PanneauCarte extends JPanel implements IConfig {
 	    {
 	    	setSize(new Dimension(IConfig.LARGEUR_CARTE * IConfig.NB_PIX_CASE, IConfig.HAUTEUR_CARTE * IConfig.NB_PIX_CASE ));
 		map = carte;
+		
+		
 	    }
+	    
+	    
 	    
 	  public void paintComponent(Graphics g)
 	  {

@@ -13,12 +13,13 @@ public class MonMain{
 	     *              Test IA 
 	     * 
 	     *************************************/
-	    JoueurIA r2d2 = new JoueurIA(fenetre.getPanJeu().getConteneurCarte().getMap());
-	    JoueurIA darkVador = new JoueurIA(fenetre.getPanJeu().getConteneurCarte().getMap());
+	  //  JoueurReel r2d2 = new JoueurReel(fenetre.getPanJeu().getConteneurCarte().getMap());
+	    
+	   // JoueurReel darkVador = new JoueurReel(fenetre.getPanJeu().getConteneurCarte().getMap());
 	   while(Monstres.nbrMonstres > 0 && Heros.nbrHeros > 0)
 	    {
-	    	r2d2.jouerHeros(fenetre.getPanJeu());
-	    	darkVador.jouerMonstre(fenetre.getPanJeu());
+	    	//r2d2.jouerHeros(fenetre.getPanJeu());
+	    	//darkVador.jouerMonstre(fenetre.getPanJeu());
 	    }
 
 	}

@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.io.FileInputStream;
@@ -32,8 +33,20 @@ public class PanneauJeu extends JPanel {
 	private Position p = new Position(0,0); // utiliser pour sauvegarder la position du souris
 	private Soldat s; // utiliser pour sauvegarder le soldat courant
 	
+	int px;
+	int py;
+	int ind;
+
+	Heros H;
+	Monstres M;
+	
+	
 	public PanneauJeu() {
 		super();
+		
+		
+		
+		
 		
 		setSize(IConfig.LARGEUR_CARTE * IConfig.NB_PIX_CASE, IConfig.HAUTEUR_CARTE * IConfig.NB_PIX_CASE + 200);
 		 messageHeader = new JLabel();
@@ -154,12 +167,117 @@ public class PanneauJeu extends JPanel {
 					}
 				});
 				
+				
+				addMouseListener(new MouseAdapter(){
+					public void mousePressed(MouseEvent e){
+						int x = e.getX();
+						int y = e.getY();
+						
+						System.out.println("P: X=   "+x/IConfig.NB_PIX_CASE+"||| Y=   "+y/IConfig.NB_PIX_CASE);
+						
+					Position p=new Position(x,y);
+					
+					px=p.getX();
+					py=p.getY();
+					
+					Carte carte=conteneurCarte.getMap();
+					//Get lhero a la position pressed
+					
+					try {
+						if (carte.getElement(p) instanceof Soldat)
+						{
+						H=(Heros)carte.getElement(p);
+						}
+					
+						
+						//System.out.println("Pelm: X=   "+Elm.getPos().getX()+"||| Y=   "+Elm.getPos().getY());
+						
+					} catch (MonException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+					
+					
+					}
+					
+					public void mouseReleased(MouseEvent e) {
+						
+						int x = e.getX()/ IConfig.NB_PIX_CASE;
+						int y = e.getY()/ IConfig.NB_PIX_CASE-1;
+						
+						
+						Position p= new Position(x,y);
+						
+				Carte carte=conteneurCarte.getMap();
 			
+				//Chercher le monstre M dans la table Elements avec la position p Realeased 
+				Element tab[]=carte.getTabElements();
+			
+				//System.out.println("----------------------   "+M.getPos().getX());
+				
+				for (int k=0;k<tab.length;k++)
+				{
+					if (tab[k].getPos().getX()==p.getX() &&tab[k].getPos().getY()==p.getY()  )
+					{  
+						if (tab[k] instanceof Monstres)
+						{
+						M=(Monstres) tab[k];
+						}
+					}
+					
+				}
+				
+				System.out.println("--------------"+M);
+						//On fait combat entre H et M
+				if (M!=null)
+				{
+				H.combat(M);	
+				M=null;
+				}
+				else
+				{
+				if (p.estValide()&&p.estVoisine(H.getPos())&&carte.estVide(p)&&(H.dejaJouee==0))	
+				{
+						H.getPos().setX(x);
+						H.getPos().setY(y);
+						H.dejaJouee=1;
+						
+						
+				}	
+				
+				
+				}
+			
+				
+				
+		
+				
+						repaint();
+				
+						
+
+					
+				}
+					
+					
+				});	
+				
+		
+				
+				
+				
+				
+				
+				
 				
 				
 	}
 	
 	public PanneauCarte getConteneurCarte() {return conteneurCarte;}
+	
+
+	
 	
 	
 }

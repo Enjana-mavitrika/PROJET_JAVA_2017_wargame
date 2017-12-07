@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 
 public class Carte implements ICarte, IConfig, Serializable
 {
-	private Element tabElements[] = new Element[NB_HEROS + NB_MONSTRES + NB_OBSTACLES] ;
+	Element tabElements[] = new Element[NB_HEROS + NB_MONSTRES + NB_OBSTACLES] ;
 	private ArmeeHeros armH=new ArmeeHeros();
 	private ArmeeMonstres armM=new ArmeeMonstres(); 
 	private boolean indmap=false;

@@ -32,6 +32,8 @@ import javax.swing.Timer;
         boolean deplace=false;
         boolean boss=false;
       public  int porteeTotale=0;
+      int dejaJouee=0;
+      
         /**
          * Soldat, constructeur Soldat
          * @param nom
@@ -116,7 +118,10 @@ import javax.swing.Timer;
                 if(this.heros) {
                     heros = (Heros) this;
                     if(this.estAPortee(soldat.getPos()) && soldat.enVie)
+                    {
                         soldat.baisserVie((int)(Math.random()*heros.getTypeH().getPuissance())+1);
+                        this.dejaJouee=1;
+                    }
                 }
                 else
                 {

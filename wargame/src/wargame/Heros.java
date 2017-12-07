@@ -22,6 +22,8 @@ public class Heros extends Soldat {
          * @param nom
          * @param carte
          */
+       
+        
         public Heros(){
             super.heros=true;
             this.typeH = TypesH.getTypeHAlea();
@@ -93,7 +95,7 @@ public class Heros extends Soldat {
         		
         		g.setColor(COULEUR_TEXTE);
         		int num = 'A' + numHeros - 1; // transformer numero en caractere A-Z
-        		g.drawString("" + (char)num, getPos().getX() * NB_PIX_CASE + NB_PIX_CASE / 4, getPos().getY() * NB_PIX_CASE + NB_PIX_CASE - NB_PIX_CASE / 4);
+        		
         		
         		g.drawImage(img,pos.getX() * NB_PIX_CASE,pos.getY() * NB_PIX_CASE,NB_PIX_CASE,NB_PIX_CASE,null);
         	}
