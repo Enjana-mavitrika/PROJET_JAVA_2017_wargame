@@ -237,7 +237,7 @@ public class PanneauJeu extends JPanel {
 				}
 				else
 				{
-				if (p.estValide()&&p.estVoisine(H.getPos())&&carte.estVide(p)&&(H.dejaJouee==0))	
+				if (p.estValide()&& p.estVoisine(H.getPos()) && carte.estVide(p)&&(H.dejaJouee==0))	
 				{
 						H.getPos().setX(x);
 						H.getPos().setY(y);
