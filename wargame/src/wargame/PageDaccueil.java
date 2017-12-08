@@ -16,7 +16,11 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 public class PageDaccueil extends JPanel implements IConfig {
-	Image img ; 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Image img ; // images de font
 	
 	public PageDaccueil() throws IOException {
 		
@@ -25,26 +29,27 @@ public class PageDaccueil extends JPanel implements IConfig {
 		
 		setBackground(Color.GRAY);
 		setPreferredSize( new Dimension(IConfig.LARGEUR_CARTE+100, IConfig.HAUTEUR_CARTE+100));
-		Font font = new Font("SansSerif", Font.ITALIC, 30);
+		Font font = new Font("SansSerif", Font.BOLD, 30);
 		
-		JLabel text1 = new JLabel(" Bienvenu dans le jeux WARGAME");
+		
+		JLabel text1 = new JLabel(" Welcome To The Game WARGAME");
 		text1.setForeground(Color.RED);
 		text1.setVerticalAlignment(SwingConstants.CENTER);
 		text1.setFont(font);
 
-		JLabel text2 = new JLabel( " Pour commencer le jeux aller dans le menu ") ;
-		text2.setForeground(Color.GREEN);
+		JLabel text2 = new JLabel( " To start the Game go to the menu ") ;
+		text2.setForeground(Color.MAGENTA);
 		text2.setVerticalAlignment(SwingConstants.CENTER);
 		text2.setFont(font);
 		
 		
-		JLabel text3 = new JLabel( " 1-(nlle-partie) you start new Game ") ;
-		text3.setForeground(Color.GREEN);
+		JLabel text3 = new JLabel( " 1-(new-part) you start new Game ") ;
+		text3.setForeground(Color.PINK);
 		text3.setVerticalAlignment(SwingConstants.CENTER);
 		text3.setFont(font);
 		
 		JLabel text4 = new JLabel( " 2- (Mode) You choose Game Mode ") ;
-		text4.setForeground(Color.GREEN);
+		text4.setForeground(Color.ORANGE);
 		text4.setVerticalAlignment(SwingConstants.CENTER);
 		text4.setFont(font);
 		
@@ -58,9 +63,6 @@ public class PageDaccueil extends JPanel implements IConfig {
 		this.add(text3);
 		this.add(text4);
 		this.add(text5);
-		
-		
-		
 		
 	}
 	
